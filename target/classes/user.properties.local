@@ -2,7 +2,7 @@
 
 # memcache configurations
 authentication.hibernate.cache.use_query_cache=false
-locator.hibernate.cache.use_second_level_cache=false
+authentication.hibernate.cache.use_second_level_cache=false
 
 # hibernate settings
 authentication.hibernate.memcached.servers=localhost:11211

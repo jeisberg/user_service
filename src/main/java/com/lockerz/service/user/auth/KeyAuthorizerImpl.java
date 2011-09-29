@@ -10,22 +10,22 @@ public class KeyAuthorizerImpl extends AuthorizerImpl {
 	private static Logger LOG = LoggerFactory.getLogger(KeyAuthorizerImpl.class);
 
 	// need this
-	private String token = null;
+	private String apiKey = null;
 	
 	// need this
 	public static final double UNAUTHORIZED = 100.01;
 	
 	// create the setter
-	public void setToken(String token) {
+	public void setApiKey(String apiKey) {
 		// set the token here
-		this.token = token;
+		this.apiKey = apiKey;
 	}
 	
-	public void authorize(String token, int serviceId) throws AuthorizerException {
+	public void authorize(String apiKey, int serviceId) throws AuthorizerException {
 		// return here
-		if(token == null || !token.equals(this.token)) {
+		if(apiKey == null || !apiKey.equals(this.apiKey)) {
 			// create the message
-			String message = "Token [" + token + "] does not have access to service [" + serviceId + "]";
+			String message = "ApiKey [" + apiKey + "] does not have access to service [" + serviceId + "]";
 			// create the exception
 			throw new AuthorizerException(message);
 		}

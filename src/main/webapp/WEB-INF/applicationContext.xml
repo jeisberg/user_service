@@ -21,7 +21,7 @@
 	</bean>
 	<bean id="keyAuthorizer" class="com.lockerz.service.user.auth.KeyAuthorizerImpl">
 		<property name="apiKey">
-        	<value>${authorizer.apikey}</value>
+        	<value>${authorizer.apiKey}</value>
     	</property>
 	</bean>
 	

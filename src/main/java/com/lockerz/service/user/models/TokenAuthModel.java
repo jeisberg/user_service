@@ -2,6 +2,7 @@ package com.lockerz.service.user.models;
 
 public class TokenAuthModel
 {
+    private Long id;
     private Long uid;
     private String apiKey;
     private String token;
@@ -13,6 +14,15 @@ public class TokenAuthModel
     public void setUid(Long uid)
     {
         this.uid = uid;
+    }
+    
+    public Long getId()
+    {
+        return id;
+    }
+    public void setId(Long id)
+    {
+        this.id = id;
     }
     public String getApiKey()
     {

@@ -10,11 +10,6 @@ import com.lockerz.service.user.models.UserLookupModelImpl;
 
 public class TokenAuthDaoImpl extends AuthDaoImpl
 {
-    
-    public TokenAuthDaoImpl()
-    {
-        
-    }
 
     @Override
     public long authenticateToken(String apiKey, String token) throws InvalidTokenException, DaoException
@@ -24,13 +19,18 @@ public class TokenAuthDaoImpl extends AuthDaoImpl
         {
             List rows = session
                         .createCriteria(UserLookupModelImpl.class)
-                        .add( Restrictions.eq( "token", token ) )
+                        .add( Restrictions.eq( "api_key", apiKey ) )
                         .add( Restrictions.eq( "token", token ) )
                         .list();
             if(rows == null || rows.size() != 1)
               throw new InvalidTokenException("Cannot find token - [" + token +"]. User is probably not authenticated");
             
-            return ((TokenAuthModel) rows.get(0)).getUid();
+            TokenAuthModel tokenModel = (TokenAuthModel) rows.get(0);
+            if(tokenModel.getToken() == null)
+                throw new InvalidTokenException("Cannot find token - [" + token +"]. User is probably not authenticated");
+
+            return tokenModel.getUid();
+            
         } catch (Exception e)
         {
             String message = this.getClass().getName() + " -> " + e.getMessage();
@@ -38,5 +38,4 @@ public class TokenAuthDaoImpl extends AuthDaoImpl
             throw new DaoException(message);        
         }
     }
-
 }
