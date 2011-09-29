@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.lockerz.service.user.models.UserLookupModelImpl" table="user_lookup">
+    	<cache usage="read-write" />
+    	<id name="id" column="uid">
+        	<generator class="assigned"/>
+    	</id>
+    	<property name="podId">
+        	<column name="pid"/>
+    	</property>
+    	<property name="email">
+        	<column name="email"/>
+    	</property>
+    	<property name="normalizedEmail">
+        	<column name="normalized_email"/>
+    	</property>
+    	<property name="created">
+        	<column name="created"/>
+    	</property>
+    	<property name="modified">
+        	<column name="last_updated"/>
+    	</property>
+	</class>
+</hibernate-mapping>

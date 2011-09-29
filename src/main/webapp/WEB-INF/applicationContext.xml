@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<context:component-scan base-package="com.lockerz.service.user.controllers" />
+	<mvc:annotation-driven />
+	<bean id="properties" class="com.lockerz.service.user.utilities.PlaceholderConfigurer" />
+	<bean id="exceptionFilter" class="com.lockerz.service.user.filters.ExceptionFilter" />
+	<bean id="authorizationFilter" class="com.lockerz.service.user.filters.AuthorizationFilter" >
+		<property name="authorizer">
+        	<ref bean="tokenAuthorizer"/>
+    	</property>
+	</bean>
+	<bean id="tokenAuthorizer" class="com.lockerz.service.user.auth.TokenAuthorizerImpl">
+		<property name="token">
+        	<value>${authorizer.token}</value>
+    	</property>
+	</bean>
+	<bean id="authenticationFilter" class="com.lockerz.service.user.filters.AuthenticationFilter" >
+		<property name="authenticator">
+        	<ref bean="tokenAuthenticator"/>
+    	</property>
+	</bean>
+	<bean id="tokenAuthenticator" class="com.lockerz.service.user.auth.TokenAuthenticatorImpl" />
+	
+	<bean id="locatorDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${locator.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${locator.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${locator.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${locator.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${locator.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${locator.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${locator.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${locator.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${locator.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="locatorSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${locator.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${locator.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${locator.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${locator.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${locator.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${locator.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${locator.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${locator.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${locator.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${locator.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="locatorDataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user_lookup.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="locatorHibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="locatorSessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod1DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod1.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod1.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod1.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod1.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod1.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod1.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod1.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod1.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod1.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod1SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod1.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod1.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod1.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod1.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod1.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod1.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod1.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod1.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod1.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod1.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod1DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod1HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod1SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod2DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod2.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod2.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod2.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod2.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod2.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod2.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod2.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod2.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod2.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod2SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod2.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod2.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod2.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod2.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod2.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod2.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod2.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod2.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod2.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod2.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod2DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod2HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod2SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod3DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod3.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod3.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod3.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod3.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod3.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod3.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod3.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod3.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod3.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod3SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod3.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod3.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod3.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod3.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod3.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod3.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod3.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod3.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod3.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod3.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod3DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod3HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod3SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod4DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod4.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod4.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod4.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod4.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod4.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod4.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod4.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod4.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod4.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod4SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod4.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod4.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod4.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod4.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod4.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod4.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod4.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod4.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod4.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod4.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod4DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod4HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod4SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod5DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod5.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod5.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod5.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod5.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod5.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod5.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod5.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod5.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod5.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod5SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod5.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod5.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod5.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod5.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod5.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod5.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod5.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod5.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod5.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod5.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod5DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod5HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod5SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="pod6DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+      	<property name="driverClass"><value>${pod6.c3po.jdbc.driver}</value></property>
+      	<property name="jdbcUrl"><value>${pod6.c3po.jdbc.url}</value></property>
+      	<property name="user"><value>${pod6.c3po.jdbc.user}</value></property>
+      	<property name="password"><value>${pod6.c3po.jdbc.password}</value></property>
+      	<property name="acquireIncrement"><value>${pod6.c3po.jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${pod6.c3po.jdbc.initialPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${pod6.c3po.jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${pod6.c3po.jdbc.minPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${pod6.c3po.jdbc.maxIdleTime}</value></property>
+    </bean>
+	<bean id="pod6SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">${pod6.hibernate.show_sql}</prop>
+            	<prop key="hibernate.format_sql">${pod6.hibernate.format_sql}</prop>
+            	<prop key="hibernate.hbm2ddl.auto">${pod6.hibernate.hbm2ddl.auto}</prop>
+    			<prop key="hibernate.memcached.servers">${pod6.hibernate.memcached.servers}</prop>
+    			<prop key="hibernate.cache.use_query_cache">${pod6.hibernate.cache.use_query_cache}</prop>
+    			<prop key="hibernate.dialect">${pod6.hibernate.dialect}</prop>
+    			<prop key="hibernate.cache.use_second_level_cache">${pod6.hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${pod6.hibernate.cache.provider_class}</prop>
+        		<prop key="hibernate.transaction.factory_class">${pod6.hibernate.transaction.factory_class}</prop> 
+				<prop key="hibernate.current_session_context_class">${pod6.hibernate.current_session_context_class}</prop>
+        	</props>
+    	</property>
+    	<property name="dataSource" ref="pod6DataSource"/>
+    	<property name="mappingResources">
+        	<list>
+            	<value>user.hbm.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="pod6HibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    	<property name="sessionFactory">
+        	<ref bean="pod6SessionFactory"/>
+    	</property>
+	</bean>
+	
+	<bean id="userService" class="com.lockerz.service.user.services.UserServiceImpl">
+		<constructor-arg>
+        	<list>
+            	<ref bean="locatorHibernateTemplate"/>
+            	<ref bean="pod1HibernateTemplate"/>
+            	<ref bean="pod2HibernateTemplate"/>
+            	<ref bean="pod3HibernateTemplate"/>
+            	<ref bean="pod4HibernateTemplate"/>
+            	<ref bean="pod5HibernateTemplate"/>
+            	<ref bean="pod6HibernateTemplate"/>
+        	</list>
+    	</constructor-arg>
+	</bean>
+</beans>
