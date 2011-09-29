@@ -3,11 +3,11 @@ package com.lockerz.service.user.auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TokenAuthorizerImpl extends AuthorizerImpl {
+public class KeyAuthorizerImpl extends AuthorizerImpl {
 	
 	// create the logger here
 	@SuppressWarnings({ "unused" })
-	private static Logger LOG = LoggerFactory.getLogger(TokenAuthorizerImpl.class);
+	private static Logger LOG = LoggerFactory.getLogger(KeyAuthorizerImpl.class);
 
 	// need this
 	private String token = null;

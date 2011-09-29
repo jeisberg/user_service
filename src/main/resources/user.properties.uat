@@ -204,7 +204,7 @@ pod6.c3po.jdbc.minPoolSize=5
 pod6.c3po.jdbc.maxIdleTime=30
 
 # lockerz authentications
-authorizer.token=sometoken
+authorizer.apiKey=sometoken
 
 # authenticate endpoint
 authenticate.endpoint=http://localhost:8080/user_service-1.0-SNAPSHOT/user/authenticate/?Authorization={token}&username={username}&password={password}&remoteIp={remoteIp}

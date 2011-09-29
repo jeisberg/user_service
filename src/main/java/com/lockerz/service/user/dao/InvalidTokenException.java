@@ -1,15 +1,15 @@
 package com.lockerz.service.user.dao;
 
-public class DaoException extends Exception
+public class InvalidTokenException extends Exception
 {
     private static final long serialVersionUID = 1L;
 
-    public DaoException() {
+    public InvalidTokenException() {
         // call parent
         super();
     }
     
-    public DaoException(String message) {
+    public InvalidTokenException(String message) {
         // call parent
         super(message);
     }
