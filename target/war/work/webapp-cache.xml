@@ -7,14 +7,15 @@
           <string>WEB-INF/applicationContext.xml</string>
           <string>WEB-INF/service-servlet.xml</string>
           <string>WEB-INF/web.xml</string>
+          <string>WEB-INF/classes/authentication.hbm.xml</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/Authenticator.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthenticatorException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthenticatorImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/Authorizer.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthorizerException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthorizerImpl.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/auth/KeyAuthorizerImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/TokenAuthenticatorImpl.class</string>
-          <string>WEB-INF/classes/com/lockerz/service/user/auth/TokenAuthorizerImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/client/Client.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/client/ClientException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/client/ClientImpl.class</string>
@@ -25,10 +26,14 @@
           <string>WEB-INF/classes/com/lockerz/service/user/controllers/ServiceControllerException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/controllers/ServiceControllerImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/controllers/UserServiceControllerImpl.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/dao/AuthDao.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/dao/AuthDaoImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/Dao.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/DaoException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/DaoFactory.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/DaoImpl.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/dao/InvalidTokenException.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/dao/TokenAuthDaoImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/UserDaoFactory.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/dao/UserDaoImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/filters/AuthenticationFilter.class</string>
@@ -37,6 +42,7 @@
           <string>WEB-INF/classes/com/lockerz/service/user/models/Model.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/models/ModelException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/models/ModelImpl.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/models/TokenAuthModel.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/models/UserLookupModelImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/models/UserModelImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/services/Service.class</string>

@@ -1,6 +1,35 @@
 # PRODUCTION CONFIGURATIONS
 
 # memcache configurations
+authentication.hibernate.cache.use_query_cache=false
+locator.hibernate.cache.use_second_level_cache=false
+
+# hibernate settings
+authentication.hibernate.memcached.servers=localhost:11211
+authentication.hibernate.dialect=org.hibernate.dialect.HSQLDialect
+authentication.hibernate.cache.provider_class=com.googlecode.hibernate.memcached.MemcachedCacheProvider
+
+# debug settings
+authentication.hibernate.show_sql=true
+authentication.hibernate.format_sql=true
+authentication.hibernate.hbm2ddl.auto=true
+
+# session settings
+authentication.hibernate.current_session_context_class=thread
+authentication.hibernate.transaction.factory_class=org.hibernate.transaction.JDBCTransactionFactory
+
+# datasource settings
+authentication.c3po.jdbc.driver=com.mysql.jdbc.Driver
+authentication.c3po.jdbc.url=jdbc:mysql://localhost/authentication
+authentication.c3po.jdbc.user=root
+authentication.c3po.jdbc.password=
+authentication.c3po.jdbc.acquireIncrement=1
+authentication.c3po.jdbc.initialPoolSize=5
+authentication.c3po.jdbc.maxPoolSize=5
+authentication.c3po.jdbc.minPoolSize=5
+authentication.c3po.jdbc.maxIdleTime=30
+
+# memcache configurations
 locator.hibernate.cache.use_query_cache=false
 locator.hibernate.cache.use_second_level_cache=false
 
@@ -204,7 +233,7 @@ pod6.c3po.jdbc.minPoolSize=5
 pod6.c3po.jdbc.maxIdleTime=30
 
 # lockerz authentications
-authorizer.token=sometoken
+authorizer.apiKey=sometoken
 
 # authenticate endpoint
 authenticate.endpoint=http://localhost:8080/user_service-1.0-SNAPSHOT/user/authenticate/?Authorization={token}&username={username}&password={password}&remoteIp={remoteIp}
