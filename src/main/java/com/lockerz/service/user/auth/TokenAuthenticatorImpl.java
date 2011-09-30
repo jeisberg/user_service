@@ -3,14 +3,12 @@ package com.lockerz.service.user.auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.orm.hibernate3.HibernateTemplate;
-
-import com.lockerz.service.user.dao.AuthDao;
 import com.lockerz.service.user.dao.AuthDaoImpl;
 import com.lockerz.service.user.dao.DaoException;
 import com.lockerz.service.user.dao.InvalidTokenException;
 import com.lockerz.service.user.services.ServiceException;
 import com.lockerz.service.user.utilities.ExceptionHelper;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class TokenAuthenticatorImpl extends AuthenticatorImpl {
 	

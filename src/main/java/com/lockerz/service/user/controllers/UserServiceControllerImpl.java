@@ -48,4 +48,18 @@ public class UserServiceControllerImpl extends ServiceControllerImpl {
 			throw new RestException(e.getMessage(), e.getMessages(), e.getHttpStatus());
 		}
     } 
+	
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+    public ResponseEntity<UserModelImpl> test(@Principal ServicePrincipal user) 
+    throws RestException {
+		// try
+		try {
+			if(true)
+				throw new RestException(user.getName(), null, null);
+		// catch here
+		} catch(ServiceException e) {
+			// throw a rest exception here
+			throw new RestException(e.getMessage(), e.getMessages(), e.getHttpStatus());
+		}
+    } 
 }
