@@ -2,6 +2,8 @@ package com.lockerz.service.user;
 
 import junit.framework.TestCase;
 import org.springframework.http.HttpStatus;
+
+import com.lockerz.service.user.auth.TokenAuthenticatorImpl;
 import com.lockerz.service.user.models.UserModelImpl;
 import org.springframework.context.ApplicationContext;
 import com.lockerz.service.user.services.UserServiceImpl;
@@ -88,4 +90,5 @@ public class ServiceTest extends TestCase {
         // exit here
     	System.exit(0);
     }
+	
 }

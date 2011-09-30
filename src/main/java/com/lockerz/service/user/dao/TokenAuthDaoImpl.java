@@ -14,7 +14,6 @@ public class TokenAuthDaoImpl extends AuthDaoImpl
     @Override
     public long authenticateToken(String apiKey, String token) throws InvalidTokenException, DaoException
     {
-    
         try
         {
             List rows = session
@@ -31,7 +30,7 @@ public class TokenAuthDaoImpl extends AuthDaoImpl
 
             return tokenModel.getUid();
             
-        } catch (Exception e)
+        } catch (HibernateException e)
         {
             String message = this.getClass().getName() + " -> " + e.getMessage();
             // throw an exception here
