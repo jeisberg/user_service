@@ -32,7 +32,7 @@ public class ServiceTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	assertEquals(e.getHttpStatus(), HttpStatus.NOT_FOUND);
+        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         }
         // test the service
         try { 
@@ -72,6 +72,23 @@ public class ServiceTest extends TestCase {
         try { 
         	// get the user lookup
         	user = userService.authenticate("", "abc123..", "");
+        	// output here
+        	System.out.println(user);
+        // catch here
+        } catch(ServiceException e) {
+        	// out here
+        	System.out.println(e.getMessage());
+        	// out here
+        	System.out.println(e.getMessages());
+        	// out here
+        	System.out.println(e.getHttpStatus());
+        	// assert here
+        	assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
+        }
+        // test the service
+        try { 
+        	// get the user lookup
+        	user = userService.authenticate("", "", "");
         	// output here
         	System.out.println(user);
         // catch here

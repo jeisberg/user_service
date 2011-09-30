@@ -5,9 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
-import com.lockerz.service.user.auth.Principal;
-import com.lockerz.service.user.auth.ServicePrincipal;
 import com.lockerz.service.user.models.UserModelImpl;
 import com.lockerz.service.user.services.ServiceImpl;
 import com.lockerz.service.user.utilities.RestException;

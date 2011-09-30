@@ -1,5 +1,7 @@
 package com.lockerz.service.user;
 
+import org.springframework.http.HttpStatus;
+
 import junit.framework.TestCase;
 import com.lockerz.service.user.models.UserModelImpl;
 import com.lockerz.service.user.client.UserClientImpl;
@@ -25,7 +27,7 @@ public class ClientTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	//assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         } catch(Exception e) {
         	// out here
         	System.out.println("EXCEPTION: " + e.getMessage());
@@ -45,7 +47,7 @@ public class ClientTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	//assertEquals(e.getHttpStatus(), HttpStatus.NOT_FOUND);
+        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         } catch(Exception e) {
         	// out here
         	System.out.println("EXCEPTION: " + e.getMessage());
@@ -65,10 +67,10 @@ public class ClientTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	//assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         } catch(Exception e) {
         	// out here
-        	System.out.println("EXCEPTION: " + e.getMessage());
+        	System.out.println(e.getMessage());
         }
         // test the service
         try { 
@@ -85,10 +87,10 @@ public class ClientTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	//assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
+        	assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
         } catch(Exception e) {
         	// out here
-        	System.out.println("EXCEPTION: " + e.getMessage());
+        	System.out.println(e.getMessage());
         }
         // test the service
         try { 
@@ -105,10 +107,10 @@ public class ClientTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	//assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
+        	assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
         } catch(Exception e) {
         	// out here
-        	System.out.println("EXCEPTION: " + e.getMessage());
+        	System.out.println(e.getMessage());
         }
         // exit here
     	System.exit(0);
