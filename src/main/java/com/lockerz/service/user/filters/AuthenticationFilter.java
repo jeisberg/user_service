@@ -7,14 +7,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletException;
+import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.lockerz.service.user.auth.Authenticator;
-import com.lockerz.service.user.auth.AuthorizerException;
 import com.lockerz.service.user.utilities.RestException;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.GenericFilterBean;
 
 public class AuthenticationFilter extends GenericFilterBean {
@@ -32,7 +29,8 @@ public class AuthenticationFilter extends GenericFilterBean {
 	public static final String STATUS_CODE = "statusCode";
 	
 	// need this
-    private Authenticator authenticator;
+	@SuppressWarnings("unused")
+	private Authenticator authenticator;
    
 	public void setAuthenticator(Authenticator authenticator) {
 		// set the authenticator here
@@ -76,21 +74,6 @@ public class AuthenticationFilter extends GenericFilterBean {
         		throw new RestException(message, null, HttpStatus.UNAUTHORIZED);
             // validate
             } else {
-            	// try
-        		try {
-        			// authenticate here
-        			authenticator.authenticate(authorization, authentication);
-        			// do the filter
-        			chain.doFilter(request, response);
-        			// return
-        			return; 
-        		// catch here
-        		} catch(AuthorizerException e) {
-        			// need this
-        			String message = this.getClass().getName() + " -> " + e.getMessage();
-        			// throw new exception here
-            		throw new RestException(message, e.getMessages(), e.getHttpStatus());
-        		}
             }
         }
     }
