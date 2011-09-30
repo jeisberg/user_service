@@ -88,5 +88,4 @@ public class ServiceTest extends TestCase {
         // exit here
     	System.exit(0);
     }
-	
 }

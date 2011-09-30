@@ -24,64 +24,13 @@
         	<value>${authorizer.apiKey}</value>
     	</property>
 	</bean>
-	
-	<bean id="authenticationDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-      	<property name="driverClass"><value>${authentication.c3po.jdbc.driver}</value></property>
-      	<property name="jdbcUrl"><value>${authentication.c3po.jdbc.url}</value></property>
-      	<property name="user"><value>${authentication.c3po.jdbc.user}</value></property>
-      	<property name="password"><value>${authentication.c3po.jdbc.password}</value></property>
-      	<property name="acquireIncrement"><value>${authentication.c3po.jdbc.acquireIncrement}</value></property>
-		<property name="initialPoolSize"><value>${authentication.c3po.jdbc.initialPoolSize}</value></property>
-		<property name="maxPoolSize"><value>${authentication.c3po.jdbc.maxPoolSize}</value></property>
-		<property name="minPoolSize"><value>${authentication.c3po.jdbc.minPoolSize}</value></property>
-		<property name="maxIdleTime"><value>${authentication.c3po.jdbc.maxIdleTime}</value></property>
-    </bean>
-    
-	<bean id="authenticationSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="hibernateProperties">
-    		<props>
-    			<prop key="hibernate.show_sql">${authentication.hibernate.show_sql}</prop>
-            	<prop key="hibernate.format_sql">${authentication.hibernate.format_sql}</prop>
-            	<prop key="hibernate.hbm2ddl.auto">${authentication.hibernate.hbm2ddl.auto}</prop>
-    			<prop key="hibernate.memcached.servers">${authentication.hibernate.memcached.servers}</prop>
-    			<prop key="hibernate.cache.use_query_cache">${authentication.hibernate.cache.use_query_cache}</prop>
-    			<prop key="hibernate.dialect">${authentication.hibernate.dialect}</prop>
-    			<prop key="hibernate.cache.use_second_level_cache">${authentication.hibernate.cache.use_second_level_cache}</prop>
-				<prop key="hibernate.cache.provider_class">${authentication.hibernate.cache.provider_class}</prop>
-        		<prop key="hibernate.transaction.factory_class">${authentication.hibernate.transaction.factory_class}</prop> 
-				<prop key="hibernate.current_session_context_class">${authentication.hibernate.current_session_context_class}</prop>
-        	</props>
-    	</property>
-    	<property name="dataSource" ref="locatorDataSource"/>
-    	<property name="mappingResources">
-        	<list>
-            	<value>authentication.hbm.xml</value>
-        	</list>
-    	</property>
-	</bean>
-	
-	<bean id="authenticationHibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-    	<property name="sessionFactory">
-        	<ref bean="authenticationSessionFactory"/>
-    	</property>
-	</bean>
-
-	<bean id="authDao" class="com.lockerz.service.user.dao.TokenAuthDaoImpl" />
-	
-	<bean id="tokenAuthenticator" class="com.lockerz.service.user.auth.TokenAuthenticatorImpl">
-		<constructor-arg index="0" >
-				<ref bean="authenticationHibernateTemplate"/>
-		</constructor-arg>
-		<constructor-arg index="1">
-				<ref bean="authDao"/>
-		</constructor-arg> 
-	</bean>
-	
+	<bean id="tokenAuthenticator" class="com.lockerz.service.user.auth.TokenAuthenticatorImpl" />
 	<bean id="authenticationFilter" class="com.lockerz.service.user.filters.AuthenticationFilter" >
 		<property name="authenticator">
         	<ref bean="tokenAuthenticator"/>
     	</property>
 	</bean>
+	
 	<bean id="locatorDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
       	<property name="driverClass"><value>${locator.c3po.jdbc.driver}</value></property>
       	<property name="jdbcUrl"><value>${locator.c3po.jdbc.url}</value></property>
