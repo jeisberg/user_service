@@ -14,6 +14,26 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
+    		user = UserClientImpl.getInstance().authenticate("ometoken", "jeisberg500@yahoo.com", "abc123..", "blah");
+        	// output here
+        	System.out.println(user);
+        // catch here
+        } catch(ClientException e) {
+        	// out here
+        	System.out.println(e.getMessage());
+        	// out here
+        	System.out.println(e.getMessages());
+        	// out here
+        	System.out.println(e.getHttpStatus());
+        	// assert here
+        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        } catch(Exception e) {
+        	// out here
+        	System.out.println("EXCEPTION: " + e.getMessage());
+        }
+        // test the service
+        try { 
+        	// get the data here
     		user = UserClientImpl.getInstance().authenticate("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
         	// output here
         	System.out.println(user);

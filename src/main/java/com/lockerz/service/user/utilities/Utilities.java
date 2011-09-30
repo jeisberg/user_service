@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.binary.Base64;
 
-public class Utilities {
+public class Utilities extends com.lockerz.service.commons.utilities.Utilities {
 	
 	// need this
 	private static final char[] HEX_CHARS = { 
@@ -18,11 +18,6 @@ public class Utilities {
 	public static final int SEED_SIZE = 10;
 	public static final int HASH_ITERATIONS = 1000;
 	public static final int ENCODED_SEED_SIZE = 14;
-	
-	public static boolean isNullOrEmpty(String target) {
-		// return here
-		return target == null || target.trim().equals("");
-	}
 	
 	public static byte[] extractSeed(String seedAndHash) {
 		// return here
