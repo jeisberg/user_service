@@ -7,7 +7,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.lockerz.service.user.auth.Authenticator;
+import com.lockerz.service.user.auth.AuthorizerException;
+import com.lockerz.service.user.utilities.RestException;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.GenericFilterBean;
 
 public class AuthenticationFilter extends GenericFilterBean {
@@ -15,6 +22,10 @@ public class AuthenticationFilter extends GenericFilterBean {
 	// create the logger here
 	@SuppressWarnings("unused")
 	private static Logger LOG = LoggerFactory.getLogger(AuthorizationFilter.class);
+	
+	// need these
+	public static final String AUTHENTICATION_HEADER = "Authentication";
+	public static final String AUTHORIZATION_HEADER = "Authorization";
     
     // need these
 	public static final String MESSAGE = "message";
@@ -31,10 +42,56 @@ public class AuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest sRequest, ServletResponse sResponse, FilterChain chain) 
     throws IOException, ServletException {
-    	// sanity check
-    	if(true) {
-    		// throw here
-    		throw new IOException("test");
-    	}
+    	// cast the request
+        HttpServletRequest request = (HttpServletRequest) sRequest;
+        // cast the response
+        HttpServletResponse response = (HttpServletResponse) sResponse;
+        // get the key here
+        String authentication = request.getHeader(AUTHENTICATION_HEADER);
+        // sanity check
+        if (authentication == null) {
+        	// allow for injection here
+        	authentication = request.getParameter(AUTHENTICATION_HEADER);
+        }
+        // sanity check
+        if (authentication == null) {
+        	// continue here
+        	chain.doFilter(request, response);
+        	// return here
+        	return;
+        // validate
+        } else {
+        	// get the key here
+            String authorization = request.getHeader(AUTHORIZATION_HEADER);
+            // sanity check
+            if (authorization == null) {
+            	// allow for injection here
+            	authorization = request.getParameter(AUTHORIZATION_HEADER);
+            }
+            // sanity check
+            if (authorization == null) {
+            	// need this
+    			String message = "unable to locate authorization";
+    			// throw new exception here
+        		throw new RestException(message, null, HttpStatus.UNAUTHORIZED);
+            // validate
+            } else {
+            	// try
+        		try {
+        			// authenticate here
+        			authenticator.authenticate(authorization, authentication);
+        			// do the filter
+        			chain.doFilter(request, response);
+        			// return
+        			return; 
+        		// catch here
+        		} catch(AuthorizerException e) {
+        			// need this
+        			String message = this.getClass().getName() + " -> " + e.getMessage();
+        			// throw new exception here
+            		throw new RestException(message, e.getMessages(), e.getHttpStatus());
+        		}
+            }
+        }
     }
 }

@@ -112,7 +112,7 @@ public class Utilities {
         return seed;
     }
 	
-	/*public static String makeRandom(int length, boolean useUpper, boolean useSpecial, boolean useNumbers) {
+	public static String makeRandom(int length, boolean useUpper, boolean useSpecial, boolean useNumbers) {
 		// need this
 		StringBuilder key = new StringBuilder();
 		// create the char set here
@@ -120,17 +120,17 @@ public class Utilities {
 		// sanity check here
 		if (useUpper) charset.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		// sanity check here
-		if (useNumbers) charset.append("0123456789");
-		// sanity check here
 		if (useSpecial) charset.append("~@#$%^*()_+-={}|][");
+		// sanity check here
+		if (useNumbers) charset.append("0123456789");
 		// need this
 		Random random = new Random();
 		// build here
 		for (int i = 0; i < length; i++) {
 			// build the key here
-			key.append("random");
+			key.append(charset.charAt(random.nextInt(charset.length())));
 		}
 		// return here
 		return key.toString();
-	}*/
+	}
 }
