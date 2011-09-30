@@ -2,7 +2,7 @@ package com.lockerz.service.user;
 
 import junit.framework.TestCase;
 import org.springframework.http.HttpStatus;
-import com.lockerz.service.user.models.UserModelImpl;
+import com.lockerz.service.user.models.UserModel;
 import org.springframework.context.ApplicationContext;
 import com.lockerz.service.user.services.UserServiceImpl;
 import com.lockerz.service.user.services.ServiceException;
@@ -16,7 +16,7 @@ public class ServiceTest extends TestCase {
         // get the template service here
         UserServiceImpl userService = (UserServiceImpl) context.getBean("userService");
         // need this
-        UserModelImpl user = null;
+        UserModel user = null;
         // test the service
         try { 
         	// get the user lookup

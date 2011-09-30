@@ -10,12 +10,15 @@ import java.util.Properties;
 import java.util.LinkedHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.lockerz.service.user.models.UserModel;
 import org.springframework.web.client.RestTemplate;
-import com.lockerz.service.user.models.UserModelImpl;
 import org.springframework.core.io.ClassPathResource;
-import com.lockerz.service.user.utilities.ResultMessage;
+import com.lockerz.service.commons.client.ClientException;
+import com.lockerz.service.commons.utilities.ResultMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import com.lockerz.service.user.utilities.PlaceholderConfigurer;
+import com.lockerz.service.commons.client.ClientResponseErrorHandler;
+import com.lockerz.service.commons.client.ClientMappingJacksonHttpMessageConverter;
 
 public class UserClientImpl implements Client {
 	
@@ -66,7 +69,7 @@ public class UserClientImpl implements Client {
 		return instance;
 	}
 	
-	public UserModelImpl authenticate(String token, String username, String password, String remoteIp) 
+	public UserModel authenticate(String token, String username, String password, String remoteIp) 
 	throws ClientException {
 		// need this
 		String endpoint = null;
@@ -99,7 +102,7 @@ public class UserClientImpl implements Client {
 		// validate the response
 		if(response.getStatusCode() == HttpStatus.OK) {
 			// return here
-			return new UserModelImpl(map);
+			return new UserModel(map);
 		// handle here
 		} else {
 			// suppress here

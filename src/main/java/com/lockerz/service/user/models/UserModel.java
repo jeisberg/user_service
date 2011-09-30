@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.sql.Timestamp;
 
-public class UserModelImpl implements Model {
+public class UserModel {
 
 	private long id;
 	private String username;
@@ -13,11 +13,11 @@ public class UserModelImpl implements Model {
 	private Date created;
 	private Timestamp modified;
 	
-	public UserModelImpl() {
+	public UserModel() {
 		super();
 	}
 	
-	public UserModelImpl(Map<String, Object> map) {
+	public UserModel(Map<String, Object> map) {
 		// sanity check
 		if(map.get("id") != null) {
 			// set here

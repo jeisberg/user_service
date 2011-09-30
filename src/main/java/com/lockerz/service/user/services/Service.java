@@ -1,14 +1,14 @@
 package com.lockerz.service.user.services;
 
-import com.lockerz.service.user.models.UserModelImpl;
-import com.lockerz.service.user.models.UserLookupModelImpl;
+import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.user.models.UserLookupModel;
 
 public interface Service {
 	
-	public UserLookupModelImpl lookupById(long id) throws ServiceException;
+	public UserLookupModel lookupById(long id) throws ServiceException;
 	
-	public UserLookupModelImpl lookupByUsername(String username) throws ServiceException;
+	public UserLookupModel lookupByUsername(String username) throws ServiceException;
 	
-	public UserModelImpl authenticate(String username, String password, String remoteIp) 
+	public UserModel authenticate(String username, String password, String remoteIp) 
 	throws ServiceException;
 }

@@ -2,15 +2,14 @@ package com.lockerz.service.user.services;
 
 import java.util.HashMap;
 import org.hibernate.Session;
+import org.springframework.http.HttpStatus;
 import com.lockerz.service.user.dao.DaoImpl;
 import com.lockerz.service.user.dao.DaoFactory;
-import com.lockerz.service.user.dao.DaoException;
+import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.utilities.Utilities;
-import com.lockerz.service.user.models.UserModelImpl;
+import com.lockerz.service.commons.dao.DaoException;
+import com.lockerz.service.user.models.UserLookupModel;
 import com.lockerz.service.user.utilities.ExceptionHelper;
-import com.lockerz.service.user.models.UserLookupModelImpl;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class UserServiceImpl extends ServiceImpl {
@@ -35,7 +34,7 @@ public class UserServiceImpl extends ServiceImpl {
 	}
 	
 	@Override
-	public UserLookupModelImpl lookupByUsername(String username) throws ServiceException {
+	public UserLookupModel lookupByUsername(String username) throws ServiceException {
 		// get the session here
 		Session session = pods[Nodes.LOCATOR.ordinal()].getSessionFactory().getCurrentSession();
 		// create the factory here
@@ -43,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl {
 		// create the instance here
 		DaoImpl dao = factory.getUserDao(session);
 		// need this
-		UserLookupModelImpl row = null;
+		UserLookupModel row = null;
 		// try
 		try {
 			// call here
@@ -71,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl {
 	}
 
 	@Override
-	public UserLookupModelImpl lookupById(long id) throws ServiceException {
+	public UserLookupModel lookupById(long id) throws ServiceException {
 		// get the session here
 		Session session = pods[Nodes.LOCATOR.ordinal()].getSessionFactory().getCurrentSession();
 		// create the factory here
@@ -79,7 +78,7 @@ public class UserServiceImpl extends ServiceImpl {
 		// create the instance here
 		DaoImpl dao = factory.getUserDao(session);
 		// need this
-		UserLookupModelImpl row = null;
+		UserLookupModel row = null;
 		// try
 		try {
 			// call here
@@ -107,7 +106,7 @@ public class UserServiceImpl extends ServiceImpl {
 	}
 	
 	@Override
-	public UserModelImpl authenticate(String username, String password, String remoteIp) 
+	public UserModel authenticate(String username, String password, String remoteIp) 
 	throws ServiceException {	
 		// need this
 		HashMap<Double,String> validation = new HashMap<Double, String>();
@@ -130,7 +129,7 @@ public class UserServiceImpl extends ServiceImpl {
 			// try
 			try {
 				// need this
-				UserLookupModelImpl lookup = lookupByUsername(username);
+				UserLookupModel lookup = lookupByUsername(username);
 				// get the session here
 				Session session = pods[lookup.getPodId()].getSessionFactory().getCurrentSession();
 				// create the factory here
@@ -138,7 +137,7 @@ public class UserServiceImpl extends ServiceImpl {
 				// create the instance here
 				DaoImpl dao = factory.getUserDao(session);
 				// get the user here
-				UserModelImpl user = dao.getUser(lookup.getId());
+				UserModel user = dao.getUser(lookup.getId());
 				// sanity check
 				if(user == null) {
 					// create the message

@@ -1,9 +1,10 @@
 package com.lockerz.service.user.client;
 
-import com.lockerz.service.user.models.UserModelImpl;
+import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.commons.client.ClientException;
 
 public interface Client {
 	
-	public UserModelImpl authenticate(String token, String username, String password, String remoteIp) 
+	public UserModel authenticate(String token, String username, String password, String remoteIp) 
 	throws ClientException;
 }

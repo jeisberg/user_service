@@ -3,8 +3,9 @@ package com.lockerz.service.user.dao;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import com.lockerz.service.user.models.UserModelImpl;
-import com.lockerz.service.user.models.UserLookupModelImpl;
+import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.commons.dao.DaoException;
+import com.lockerz.service.user.models.UserLookupModel;
 
 public class UserDaoImpl extends DaoImpl {
 	
@@ -23,21 +24,21 @@ public class UserDaoImpl extends DaoImpl {
 	}
 	
 	@Override
-	public UserLookupModelImpl lookupByUsername(String username) throws DaoException {
+	public UserLookupModel lookupByUsername(String username) throws DaoException {
 		// try
 		try {
 			// need this
-			UserLookupModelImpl row = null;
+			UserLookupModel row = null;
 			// need this
 			@SuppressWarnings("rawtypes")
 			List rows = session
-				.createCriteria(UserLookupModelImpl.class)
+				.createCriteria(UserLookupModel.class)
 				.add( Restrictions.eq( "email", username ) )
 				.list();
 			// sanity check
 			if(rows != null && rows.size() == 1) {
 				// need this
-				row = (UserLookupModelImpl) rows.get(0);
+				row = (UserLookupModel) rows.get(0);
 			}
 			// return here
 			return row;
@@ -51,21 +52,21 @@ public class UserDaoImpl extends DaoImpl {
 	}
 	
 	@Override
-	public UserLookupModelImpl lookupById(long id) throws DaoException {
+	public UserLookupModel lookupById(long id) throws DaoException {
 		// try
 		try {
 			// need this
-			UserLookupModelImpl row = null;
+			UserLookupModel row = null;
 			// need this
 			@SuppressWarnings("rawtypes")
 			List rows = session
-				.createCriteria(UserLookupModelImpl.class)
+				.createCriteria(UserLookupModel.class)
 				.add( Restrictions.eq( "id", id ) )
 				.list();
 			// sanity check
 			if(rows != null && rows.size() == 1) {
 				// need this
-				row = (UserLookupModelImpl) rows.get(0);
+				row = (UserLookupModel) rows.get(0);
 			}
 			// return here
 			return row;
@@ -79,11 +80,11 @@ public class UserDaoImpl extends DaoImpl {
 	}
 	
 	@Override
-	public UserModelImpl getUser(long id) throws DaoException {
+	public UserModel getUser(long id) throws DaoException {
 		// try
 		try {
 			// need this
-			UserModelImpl user = (UserModelImpl) session.get(UserModelImpl.class, id);
+			UserModel user = (UserModel) session.get(UserModel.class, id);
 			// need this
 			return user;
 		// catch here
@@ -96,7 +97,7 @@ public class UserDaoImpl extends DaoImpl {
 	}
 	
 	@Override
-	public void updateUser(UserModelImpl user) throws DaoException {
+	public void updateUser(UserModel user) throws DaoException {
 		// try
 		try {
 			// need this

@@ -13,8 +13,8 @@
 	<context:component-scan base-package="com.lockerz.service.user.controllers" />
 	<mvc:annotation-driven />
 	<bean id="properties" class="com.lockerz.service.user.utilities.PlaceholderConfigurer" />
-	<bean id="exceptionFilter" class="com.lockerz.service.user.filters.ExceptionFilter" />
-	<bean id="authorizationFilter" class="com.lockerz.service.user.filters.AuthorizationFilter" >
+	<bean id="exceptionFilter" class="com.lockerz.service.commons.filters.ExceptionFilter" />
+	<bean id="authorizationFilter" class="com.lockerz.service.commons.filters.AuthorizationFilter" >
 		<property name="authorizer">
         	<ref bean="keyAuthorizer"/>
     	</property>
@@ -25,7 +25,7 @@
     	</property>
 	</bean>
 	<bean id="tokenAuthenticator" class="com.lockerz.service.user.auth.TokenAuthenticatorImpl" />
-	<bean id="authenticationFilter" class="com.lockerz.service.user.filters.AuthenticationFilter" >
+	<bean id="authenticationFilter" class="com.lockerz.service.commons.filters.AuthenticationFilter" >
 		<property name="authenticator">
         	<ref bean="tokenAuthenticator"/>
     	</property>
