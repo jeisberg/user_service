@@ -1,6 +1,9 @@
 package com.lockerz.service.user.auth;
 
-public class TokenAuthenticatorImpl extends AuthenticatorImpl {
+import com.lockerz.service.commons.auth.Authenticator;
+import com.lockerz.service.commons.auth.AuthenticatorException;
+
+public class TokenAuthenticatorImpl implements Authenticator {
 
 	@Override
 	public long authenticate(String apiKey, String token) throws AuthenticatorException {

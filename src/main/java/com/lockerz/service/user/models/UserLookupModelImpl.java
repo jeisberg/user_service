@@ -2,7 +2,7 @@ package com.lockerz.service.user.models;
 
 import java.sql.Timestamp;
 
-public class UserLookupModelImpl extends ModelImpl {
+public class UserLookupModelImpl implements Model {
 	
 	private long id = -1;
 	private int podId = -1;

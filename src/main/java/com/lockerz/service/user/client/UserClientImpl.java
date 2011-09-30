@@ -17,7 +17,7 @@ import com.lockerz.service.user.utilities.ResultMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import com.lockerz.service.user.utilities.PlaceholderConfigurer;
 
-public class UserClientImpl extends ClientImpl {
+public class UserClientImpl implements Client {
 	
 	// need this
 	public static final double BAD_ENDPOINT = 100.02;

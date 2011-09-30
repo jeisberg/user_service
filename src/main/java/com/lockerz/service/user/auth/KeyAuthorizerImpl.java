@@ -3,7 +3,10 @@ package com.lockerz.service.user.auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class KeyAuthorizerImpl extends AuthorizerImpl {
+import com.lockerz.service.commons.auth.Authorizer;
+import com.lockerz.service.commons.auth.AuthorizerException;
+
+public class KeyAuthorizerImpl implements Authorizer {
 	
 	// create the logger here
 	@SuppressWarnings({ "unused" })

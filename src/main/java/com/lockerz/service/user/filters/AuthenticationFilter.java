@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.lockerz.service.user.auth.Authenticator;
+import com.lockerz.service.commons.auth.Authenticator;
 import com.lockerz.service.user.utilities.RestException;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -74,6 +74,7 @@ public class AuthenticationFilter extends GenericFilterBean {
         		throw new RestException(message, null, HttpStatus.UNAUTHORIZED);
             // validate
             } else {
+            	
             }
         }
     }

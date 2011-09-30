@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.sql.Timestamp;
 
-public class UserModelImpl extends ModelImpl {
+public class UserModelImpl implements Model {
 
 	private long id;
 	private String username;

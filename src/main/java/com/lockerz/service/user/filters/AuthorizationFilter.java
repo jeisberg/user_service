@@ -10,10 +10,10 @@ import javax.servlet.ServletException;
 import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.lockerz.service.user.auth.Authorizer;
+import com.lockerz.service.commons.auth.Authorizer;
 import org.springframework.web.filter.GenericFilterBean;
 import com.lockerz.service.user.utilities.RestException;
-import com.lockerz.service.user.auth.AuthorizerException;
+import com.lockerz.service.commons.auth.AuthorizerException;
 
 public class AuthorizationFilter extends GenericFilterBean {
 	
