@@ -2,6 +2,9 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.lockerz.service.user.models.TokenAuthModel" table="user_app_auth">
+        <id name="id" column="id">
+        	<generator class="assigned"/>
+    	</id>
     	<property name="uid">
         	<column name="uid"/>
     	</property>
