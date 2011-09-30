@@ -34,18 +34,7 @@ public class AuthenticationTest extends TestCase
             System.out.println(ae.getMessages());
             // out here
             System.out.println(ae.getHttpStatus());
-            // assert here
-            assertEquals(ae.getHttpStatus(), HttpStatus.FORBIDDEN);
             
-        }catch(ServiceException e) {
-            // out here
-            System.out.println(e.getMessage());
-            // out here
-            System.out.println(e.getMessages());
-            // out here
-            System.out.println(e.getHttpStatus());
-            // assert here
-            assertEquals(e.getHttpStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
         System.exit(0);

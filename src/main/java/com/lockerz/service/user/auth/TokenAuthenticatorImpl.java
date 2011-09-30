@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import com.lockerz.service.user.dao.AuthDaoImpl;
 import com.lockerz.service.user.dao.DaoException;
 import com.lockerz.service.user.dao.InvalidTokenException;
-import com.lockerz.service.user.services.ServiceException;
 import com.lockerz.service.user.utilities.ExceptionHelper;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -21,28 +20,26 @@ public class TokenAuthenticatorImpl extends AuthenticatorImpl {
 	// need this
 	public static final double UNAUTHORIZED = 100.01;
 	
-	public TokenAuthenticatorImpl(HibernateTemplate authTemplate, AuthDaoImpl daoImpl)
-	{
+	public TokenAuthenticatorImpl(HibernateTemplate authTemplate, AuthDaoImpl daoImpl) {
 	    daoImpl.setSession(authTemplate.getSessionFactory().getCurrentSession());
 	    this.dao = daoImpl;
 	}
 	
 	@Override
-	public long authenticate(String apiKey, String token) throws AuthenticatorException, ServiceException {
+	public long authenticate(String apiKey, String token) throws AuthenticatorException {
 
-	    try
-		{
+	    try {
 	        dao.startSession();
 		    return dao.authenticateToken(apiKey, token);
-		} catch (InvalidTokenException ite)
-		{
-		    throw new AuthenticatorException(ite.getMessage(), null, HttpStatus.FORBIDDEN);
 		    
-		} catch (DaoException de)
-		{
-		    throw ExceptionHelper.fatal(ExceptionHelper.EXCEPTION, de.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		} finally
-		{
+		} catch (InvalidTokenException ite) {
+		    throw ExceptionHelper.authenticationFatal(ExceptionHelper.EXCEPTION,ite.getMessage(), HttpStatus.FORBIDDEN);
+		    
+		} catch (DaoException de) {
+		    
+		    throw ExceptionHelper.authenticationFatal(ExceptionHelper.EXCEPTION, de.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		} finally {
 		    dao.closeSession();
 		}
 		

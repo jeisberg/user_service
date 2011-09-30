@@ -15,6 +15,8 @@
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthorizerException.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/AuthorizerImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/KeyAuthorizerImpl.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/auth/Principal.class</string>
+          <string>WEB-INF/classes/com/lockerz/service/user/auth/ServicePrincipal.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/auth/TokenAuthenticatorImpl.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/client/Client.class</string>
           <string>WEB-INF/classes/com/lockerz/service/user/client/ClientException.class</string>
