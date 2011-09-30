@@ -1,17 +1,16 @@
 package com.lockerz.service.user;
 
-import org.springframework.http.HttpStatus;
-
 import junit.framework.TestCase;
-import com.lockerz.service.user.models.UserModelImpl;
+import org.springframework.http.HttpStatus;
+import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.client.UserClientImpl;
-import com.lockerz.service.user.client.ClientException;
+import com.lockerz.service.commons.client.ClientException;
 
 public class ClientTest extends TestCase {
 	
 	public void test() {
         // need this
-        UserModelImpl user = null;
+        UserModel user = null;
         // test the service
         try { 
         	// get the data here
