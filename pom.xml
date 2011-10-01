@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
  	<modelVersion>4.0.0</modelVersion>
-  	<groupId>com.lockerz.service.user</groupId>
-  	<artifactId>user_service</artifactId>
+  	<groupId>com.lockerz.service</groupId>
+  	<artifactId>user</artifactId>
   	<version>1.0-SNAPSHOT</version>
   	<packaging>war</packaging>
-  	<name>user_service</name>
+  	<name>user</name>
   	<url>http://maven.apache.org</url>
   	<properties>
   		<environment.uat>uat</environment.uat>
@@ -18,7 +18,7 @@
   		<dependency>
     		<groupId>com.lockerz.service</groupId>
     		<artifactId>commons</artifactId>
-    		<version>1.0-20110930.233110-1</version>
+    		<version>1.0-20111001.000655-1</version>
 		</dependency>
   		<dependency>
     		<groupId>commons-codec</groupId>

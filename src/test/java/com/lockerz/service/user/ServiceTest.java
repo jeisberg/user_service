@@ -20,7 +20,7 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.authenticate("eisberg500@yahoo.com", "abc123.", "");
+        	user = userService.login("eisberg500@yahoo.com", "abc123.", "");
         	// output here
         	System.out.println(user);
         // catch here
@@ -37,7 +37,7 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.authenticate("jeisberg500@yahoo.com", "abc123.", "");
+        	user = userService.login("jeisberg500@yahoo.com", "abc123.", "");
         	// output here
         	System.out.println(user);
         // catch here
@@ -54,7 +54,7 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.authenticate("jeisberg500@yahoo.com", "", "");
+        	user = userService.login("jeisberg500@yahoo.com", "", "");
         	// output here
         	System.out.println(user);
         // catch here
@@ -71,7 +71,7 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.authenticate("", "abc123..", "");
+        	user = userService.login("", "abc123..", "");
         	// output here
         	System.out.println(user);
         // catch here
@@ -88,7 +88,7 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.authenticate("", "", "");
+        	user = userService.login("", "", "");
         	// output here
         	System.out.println(user);
         // catch here

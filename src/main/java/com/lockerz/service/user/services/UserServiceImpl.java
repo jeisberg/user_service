@@ -106,7 +106,7 @@ public class UserServiceImpl extends ServiceImpl {
 	}
 	
 	@Override
-	public UserModel authenticate(String username, String password, String remoteIp) 
+	public UserModel login(String username, String password, String remoteIp) 
 	throws ServiceException {	
 		// need this
 		HashMap<Double,String> validation = new HashMap<Double, String>();

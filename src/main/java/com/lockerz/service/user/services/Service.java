@@ -9,6 +9,6 @@ public interface Service {
 	
 	public UserLookupModel lookupByUsername(String username) throws ServiceException;
 	
-	public UserModel authenticate(String username, String password, String remoteIp) 
+	public UserModel login(String username, String password, String remoteIp) 
 	throws ServiceException;
 }
