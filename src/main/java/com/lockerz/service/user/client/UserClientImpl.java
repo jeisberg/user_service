@@ -69,7 +69,7 @@ public class UserClientImpl implements Client {
 		return instance;
 	}
 	
-	public UserModel authenticate(String token, String username, String password, String remoteIp) 
+	public UserModel login(String token, String username, String password, String remoteIp) 
 	throws ClientException {
 		// need this
 		String endpoint = null;

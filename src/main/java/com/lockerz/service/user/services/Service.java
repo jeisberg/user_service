@@ -2,6 +2,7 @@ package com.lockerz.service.user.services;
 
 import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.models.UserLookupModel;
+import com.lockerz.service.commons.services.ServiceException;
 
 public interface Service {
 	

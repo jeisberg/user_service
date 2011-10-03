@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.services.ServiceImpl;
-import com.lockerz.service.user.services.ServiceException;
+import com.lockerz.service.commons.services.ServiceException;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +29,13 @@ public class UserServiceController {
         this.service = service;
     }
 	
-	@RequestMapping(value="/authenticate", method = RequestMethod.GET)
-    public ResponseEntity<UserModel> authenticate(String username, String password, String remoteIp) 
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+    public ResponseEntity<UserModel> login(String username, String password, String remoteIp) 
     throws ServiceControllerException {
 		// try
 		try {
 			// get the user here
-			UserModel userModel = service.authenticate(username, password, remoteIp);
+			UserModel userModel = service.login(username, password, remoteIp);
 			// sanity check
 			if(userModel != null) {
 				// return here

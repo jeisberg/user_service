@@ -2,7 +2,7 @@ package com.lockerz.service.user.utilities;
 
 import java.util.HashMap;
 import org.springframework.http.HttpStatus;
-import com.lockerz.service.user.services.ServiceException;
+import com.lockerz.service.commons.services.ServiceException;
 
 public class ExceptionHelper {
 	

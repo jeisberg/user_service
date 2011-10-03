@@ -5,6 +5,6 @@ import com.lockerz.service.commons.client.ClientException;
 
 public interface Client {
 	
-	public UserModel authenticate(String token, String username, String password, String remoteIp) 
+	public UserModel login(String token, String username, String password, String remoteIp) 
 	throws ClientException;
 }

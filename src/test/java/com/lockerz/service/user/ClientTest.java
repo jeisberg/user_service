@@ -14,7 +14,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("ometoken", "jeisberg500@yahoo.com", "abc123..", "blah");
+    		user = UserClientImpl.getInstance().login("ometoken", "jeisberg500@yahoo.com", "abc123..", "blah");
         	// output here
         	System.out.println(user);
         // catch here
@@ -34,7 +34,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
+    		user = UserClientImpl.getInstance().login("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
         	// output here
         	System.out.println(user);
         // catch here
@@ -54,7 +54,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
+    		user = UserClientImpl.getInstance().login("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
         	// output here
         	System.out.println(user);
         // catch here
@@ -74,7 +74,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("sometoken", "jeisberg500@yahoo.com", "abc123.", "blah");
+    		user = UserClientImpl.getInstance().login("sometoken", "jeisberg500@yahoo.com", "abc123.", "blah");
         	// output here
         	System.out.println(user);
         // catch here
@@ -94,7 +94,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("sometoken", "jeisberg500@yahoo.com", "", "blah");
+    		user = UserClientImpl.getInstance().login("sometoken", "jeisberg500@yahoo.com", "", "blah");
         	// output here
         	System.out.println(user);
         // catch here
@@ -114,7 +114,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().authenticate("sometoken", "", "abc123..", "blah");
+    		user = UserClientImpl.getInstance().login("sometoken", "", "abc123..", "blah");
         	// output here
         	System.out.println(user);
         // catch here

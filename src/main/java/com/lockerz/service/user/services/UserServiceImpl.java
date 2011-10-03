@@ -11,6 +11,7 @@ import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
 import com.lockerz.service.user.utilities.ExceptionHelper;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import com.lockerz.service.commons.services.ServiceException;
 
 public class UserServiceImpl extends ServiceImpl {
 	
