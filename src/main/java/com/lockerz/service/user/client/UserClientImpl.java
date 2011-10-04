@@ -69,7 +69,7 @@ public class UserClientImpl implements Client {
 		return instance;
 	}
 	
-	public UserModel login(String token, String username, String password, String remoteIp) 
+	public String login(String token, String username, String password, String remoteIp) 
 	throws ClientException {
 		// need this
 		String endpoint = null;
@@ -86,7 +86,7 @@ public class UserClientImpl implements Client {
 		// need this
 		Map<String, String> vars = new HashMap<String, String>();
 		// set the user name
-		vars.put("token", token);
+		vars.put("apiKey", token);
 		// set the user name
 		vars.put("username", username);
 		// set the password
@@ -101,8 +101,8 @@ public class UserClientImpl implements Client {
 		Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 		// validate the response
 		if(response.getStatusCode() == HttpStatus.OK) {
-			// return here
-			return new UserModel(map);
+			 
+			return (String) map.get("token");
 		// handle here
 		} else {
 			// suppress here

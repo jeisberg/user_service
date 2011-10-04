@@ -1,5 +1,11 @@
 package com.lockerz.service.user.services;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.RequestHeader;
+
 import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.models.UserLookupModel;
 import com.lockerz.service.commons.services.ServiceException;
@@ -10,6 +16,6 @@ public interface Service {
 	
 	public UserLookupModel lookupByUsername(String username) throws ServiceException;
 	
-	public UserModel login(String username, String password, String remoteIp) 
+	public String login(String apiKey, String username, String password, String remoteIp) 
 	throws ServiceException;
 }

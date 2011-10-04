@@ -1,16 +1,25 @@
 package com.lockerz.service.user.services;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import com.lockerz.service.user.dao.DaoImpl;
 import com.lockerz.service.user.dao.DaoFactory;
 import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.utilities.Utilities;
+import com.lockerz.service.authentication.client.AuthenticationClientImpl;
+import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
 import com.lockerz.service.user.utilities.ExceptionHelper;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.lockerz.service.commons.services.ServiceException;
 
 public class UserServiceImpl extends ServiceImpl {
@@ -28,7 +37,8 @@ public class UserServiceImpl extends ServiceImpl {
 	public static final double EMPTY_USER = 200.31;
 	public static final double DISABLED_USER = 200.41;
 	public static final double INVALID_PASSWORD = 200.51;
-	
+	public static final double TOKEN_CREATE_FAILED = 200.61;
+    
 	public UserServiceImpl(HibernateTemplate[] pods) {
 		// set the pods here
 		this.pods = pods;
@@ -107,8 +117,9 @@ public class UserServiceImpl extends ServiceImpl {
 	}
 	
 	@Override
-	public UserModel login(String username, String password, String remoteIp) 
+	public String login(String apiKey, String username, String password, String remoteIp) 
 	throws ServiceException {	
+	    
 		// need this
 		HashMap<Double,String> validation = new HashMap<Double, String>();
 		// validate the data here
@@ -170,8 +181,14 @@ public class UserServiceImpl extends ServiceImpl {
 								// update the user
 								dao.updateUser(user);
 							}
-							// return here
-							return user;
+							
+							// user is authenticated at this point. call the authentication service to get the token
+							try {							  							   
+							   return AuthenticationClientImpl.getInstance().getToken(apiKey, user.getId());
+							   
+							} catch (ClientException ce) {
+							    throw ExceptionHelper.fatal(TOKEN_CREATE_FAILED, ce.getMessage(), ce.getHttpStatus());
+							}
 						} else {
 							// create the message
 							String message = "invalid password for user [" + username + "]";

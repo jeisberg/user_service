@@ -1,22 +1,23 @@
 package com.lockerz.service.user;
 
 import junit.framework.TestCase;
+
 import org.springframework.http.HttpStatus;
-import com.lockerz.service.user.models.UserModel;
-import com.lockerz.service.user.client.UserClientImpl;
+
 import com.lockerz.service.commons.client.ClientException;
+import com.lockerz.service.user.client.UserClientImpl;
 
 public class ClientTest extends TestCase {
 	
 	public void test() {
         // need this
-        UserModel user = null;
+        String userToken = null;
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("ometoken", "jeisberg500@yahoo.com", "abc123..", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "srijith@lockerz.com", "lockerz", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here
@@ -34,9 +35,9 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "eisberg500@yahoo.com", "abc123..", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here
@@ -54,9 +55,9 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("sometoken", "eisberg500@yahoo.com", "abc123..", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "srijith@lockerz.com", "abc123..", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here
@@ -74,9 +75,9 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("sometoken", "jeisberg500@yahoo.com", "abc123.", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "srijith@lockerz.com", "bad...", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here
@@ -94,9 +95,9 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("sometoken", "jeisberg500@yahoo.com", "", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "srijith@lockerz.com", "", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here
@@ -114,9 +115,9 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		user = UserClientImpl.getInstance().login("sometoken", "", "abc123..", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "", "abc123..", "blah");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ClientException e) {
         	// out here

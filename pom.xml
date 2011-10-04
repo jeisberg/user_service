@@ -18,7 +18,13 @@
   		<dependency>
     		<groupId>com.lockerz.service</groupId>
     		<artifactId>commons</artifactId>
-    		<version>1.0-20111001.000655-1</version>
+    		<version>1.0-20111004.011123-4</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.lockerz.service.authentication</groupId>
+    		<artifactId>authentication_service</artifactId>
+    		<version>1.0-20111004.012037-2</version>
+    		<classifier>bin</classifier>
 		</dependency>
   		<dependency>
     		<groupId>commons-codec</groupId>
@@ -116,17 +122,15 @@
 		</dependency>
   	</dependencies>
   	<distributionManagement>
-       	<repository>
-       		<uniqueVersion>true</uniqueVersion>
-        	<id>John-Eisbergs-MacBook-Pro-2.local</id>
-       	 	<name>John-Eisbergs-MacBook-Pro-2.local-releases</name>
-        	<url>http://localhost:8080/artifactory/libs-release-local</url>
+    	<repository>
+        	<id>LKRZ-68.local</id>
+        	<name>LKRZ-68.local-releases</name>
+        	<url>http://localhost:8080/artifactory/ext-release-local</url>
     	</repository>
     	<snapshotRepository>
-    		<uniqueVersion>true</uniqueVersion>
-        	<id>John-Eisbergs-MacBook-Pro-2.local</id>
-        	<name>John-Eisbergs-MacBook-Pro-2.local-snapshots</name>
-        	<url>http://localhost:8080/artifactory/libs-snapshot-local</url>
+        	<id>LKRZ-68.local</id>
+        	<name>LKRZ-68.local-snapshots</name>
+        	<url>http://localhost:8080/artifactory/ext-snapshot-local</url>
     	</snapshotRepository>
 	</distributionManagement>
   	<build>

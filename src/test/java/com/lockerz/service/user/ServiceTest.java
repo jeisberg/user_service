@@ -16,13 +16,13 @@ public class ServiceTest extends TestCase {
         // get the template service here
         UserServiceImpl userService = (UserServiceImpl) context.getBean("userService");
         // need this
-        UserModel user = null;
+        String userToken = null;
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.login("eisberg500@yahoo.com", "abc123.", "");
+        	userToken = userService.login("A1234567890B", "srijith@lockerz.com", "lockerz", "");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ServiceException e) {
         	// out here
@@ -32,14 +32,14 @@ public class ServiceTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        	//assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         }
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.login("jeisberg500@yahoo.com", "abc123.", "");
+        	userToken = userService.login("A1234567890B", "srijith@lockerz.com", "baddd", "");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ServiceException e) {
         	// out here
@@ -49,14 +49,14 @@ public class ServiceTest extends TestCase {
         	// out here
         	System.out.println(e.getHttpStatus());
         	// assert here
-        	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        //	assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         }
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.login("jeisberg500@yahoo.com", "", "");
+        	userToken = userService.login("A1234567890B", "srijith@lockerz.com", "", "");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ServiceException e) {
         	// out here
@@ -71,9 +71,9 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.login("", "abc123..", "");
+        	userToken = userService.login("A1234567890B", "", "abc123..", "");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ServiceException e) {
         	// out here
@@ -88,9 +88,9 @@ public class ServiceTest extends TestCase {
         // test the service
         try { 
         	// get the user lookup
-        	user = userService.login("", "", "");
+        	userToken = userService.login("A1234567890B","", "", "");
         	// output here
-        	System.out.println(user);
+        	System.out.println(userToken);
         // catch here
         } catch(ServiceException e) {
         	// out here
@@ -101,6 +101,24 @@ public class ServiceTest extends TestCase {
         	System.out.println(e.getHttpStatus());
         	// assert here
         	assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
+        }
+        
+     // test the service
+        try { 
+            // get the user lookup
+            userToken = userService.login("invalid Key","srijith@lockerz.com", "lockerz", "");
+            // output here
+            System.out.println(userToken);
+        // catch here
+        } catch(ServiceException e) {
+            // out here
+            System.out.println(e.getMessage());
+            // out here
+            System.out.println(e.getMessages());
+            // out here
+            System.out.println(e.getHttpStatus());
+            // assert here
+            assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         }
         // exit here
     	System.exit(0);

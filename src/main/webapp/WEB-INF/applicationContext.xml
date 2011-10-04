@@ -19,12 +19,12 @@
         	<ref bean="keyAuthorizer"/>
     	</property>
 	</bean>
-	<bean id="keyAuthorizer" class="com.lockerz.service.user.auth.KeyAuthorizerImpl">
+	<bean id="keyAuthorizer" class="com.lockerz.service.authentication.auth.KeyAuthorizerImpl">
 		<property name="apiKey">
         	<value>${authorizer.apiKey}</value>
     	</property>
 	</bean>
-	<bean id="tokenAuthenticator" class="com.lockerz.service.user.auth.TokenAuthenticatorImpl" />
+	<bean id="tokenAuthenticator" class="com.lockerz.service.authentication.auth.TokenAuthenticatorImpl" />
 	<bean id="authenticationFilter" class="com.lockerz.service.commons.filters.AuthenticationFilter" >
 		<property name="authenticator">
         	<ref bean="tokenAuthenticator"/>
