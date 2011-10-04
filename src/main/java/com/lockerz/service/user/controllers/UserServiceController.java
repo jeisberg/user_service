@@ -1,22 +1,18 @@
 package com.lockerz.service.user.controllers;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import com.lockerz.service.user.models.UserModel;
-import com.lockerz.service.user.services.ServiceImpl;
-import com.lockerz.service.user.utilities.ExceptionHelper;
 import com.lockerz.service.user.utilities.Utilities;
+import com.lockerz.service.user.services.ServiceImpl;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.lockerz.service.commons.services.ServiceException;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.lockerz.service.commons.controllers.ServiceControllerException;
@@ -29,7 +25,7 @@ public class UserServiceController {
 	private static Logger LOG = LoggerFactory.getLogger(UserServiceController.class);
 
 	// need this
-	private ServiceImpl service = null;
+	private ServiceImpl	service = null;
 	
 	@Autowired
     public void setService(ServiceImpl service) {
@@ -42,18 +38,24 @@ public class UserServiceController {
     throws ServiceControllerException {
 		// try
 		try {
-		    
+		    // get the authorization key here
 		    String apiKey = Utilities.getAuthorizationKey(request);
-            if(apiKey == null)
-                throw new ServiceControllerException("Cannot find authorization key", null, HttpStatus.UNAUTHORIZED);
-
+		    // sanity check
+            if(apiKey == null) {
+            	// need this
+            	String message = "Cannot find authorization key";
+            	// throw the exception here and go
+                throw new ServiceControllerException(message, null, HttpStatus.UNAUTHORIZED);
+            }
 			// get the user here
 			String token = service.login(apiKey, username, password, remoteIp);
 			// sanity check
 			if(token != null) {
 				// return here
 			    Map<String,String> result = new HashMap<String, String>();
+			    // put the result here
 			    result.put("token", token);
+			    // return the token here and go
 				return new ResponseEntity<Map<String,String>>(result, HttpStatus.OK);
 			// no user
 			} else {

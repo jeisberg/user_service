@@ -1,26 +1,19 @@
 package com.lockerz.service.user.services;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import com.lockerz.service.user.dao.DaoImpl;
 import com.lockerz.service.user.dao.DaoFactory;
 import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.utilities.Utilities;
-import com.lockerz.service.authentication.client.AuthenticationClientImpl;
-import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
 import com.lockerz.service.user.utilities.ExceptionHelper;
+import com.lockerz.service.commons.client.ClientException;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.lockerz.service.commons.services.ServiceException;
+import com.lockerz.service.authentication.client.AuthenticationClientImpl;
 
 public class UserServiceImpl extends ServiceImpl {
 	
@@ -119,7 +112,6 @@ public class UserServiceImpl extends ServiceImpl {
 	@Override
 	public String login(String apiKey, String username, String password, String remoteIp) 
 	throws ServiceException {	
-	    
 		// need this
 		HashMap<Double,String> validation = new HashMap<Double, String>();
 		// validate the data here
@@ -181,12 +173,13 @@ public class UserServiceImpl extends ServiceImpl {
 								// update the user
 								dao.updateUser(user);
 							}
-							
-							// user is authenticated at this point. call the authentication service to get the token
-							try {							  							   
-							   return AuthenticationClientImpl.getInstance().getToken(apiKey, user.getId());
-							   
+							// try
+							try {
+								// user is authenticated at this point. call the authentication service to get the token
+								return AuthenticationClientImpl.getInstance().getToken(apiKey, user.getId());
+							// catch and throw here
 							} catch (ClientException ce) {
+								// throw a fatal exception and go here
 							    throw ExceptionHelper.fatal(TOKEN_CREATE_FAILED, ce.getMessage(), ce.getHttpStatus());
 							}
 						} else {

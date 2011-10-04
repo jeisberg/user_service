@@ -18,13 +18,13 @@
   		<dependency>
     		<groupId>com.lockerz.service</groupId>
     		<artifactId>commons</artifactId>
-    		<version>1.0-20111004.011123-4</version>
+    		<version>1.0-20111004.025046-1</version>
 		</dependency>
 		<dependency>
     		<groupId>com.lockerz.service.authentication</groupId>
     		<artifactId>authentication_service</artifactId>
-    		<version>1.0-20111004.012037-2</version>
-    		<classifier>bin</classifier>
+    		<version>1.0-20111004.025312-1</version>
+   	 		<classifier>bin</classifier>
 		</dependency>
   		<dependency>
     		<groupId>commons-codec</groupId>

@@ -2,13 +2,12 @@ package com.lockerz.service.user;
 
 import junit.framework.TestCase;
 import org.springframework.http.HttpStatus;
-import com.lockerz.service.user.models.UserModel;
 import org.springframework.context.ApplicationContext;
 import com.lockerz.service.user.services.UserServiceImpl;
 import com.lockerz.service.commons.services.ServiceException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ServiceTest extends TestCase {
+public class Service extends TestCase {
 
 	public void test() {
     	// get the context here

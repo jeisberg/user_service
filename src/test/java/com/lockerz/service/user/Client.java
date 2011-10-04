@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.user.client.UserClientImpl;
 
-public class ClientTest extends TestCase {
+public class Client extends TestCase {
 	
 	public void test() {
         // need this
@@ -15,7 +15,7 @@ public class ClientTest extends TestCase {
         // test the service
         try { 
         	// get the data here
-    		userToken = UserClientImpl.getInstance().login("A1234567890B", "srijith@lockerz.com", "lockerz", "blah");
+    		userToken = UserClientImpl.getInstance().login("A1234567890B", "jeisberg500@yahoo.com", "abc123..", "blah");
         	// output here
         	System.out.println(userToken);
         // catch here

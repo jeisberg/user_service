@@ -10,7 +10,6 @@ import java.util.Properties;
 import java.util.LinkedHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.lockerz.service.user.models.UserModel;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.ClassPathResource;
 import com.lockerz.service.commons.client.ClientException;
@@ -101,7 +100,7 @@ public class UserClientImpl implements Client {
 		Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 		// validate the response
 		if(response.getStatusCode() == HttpStatus.OK) {
-			 
+			// return the token here
 			return (String) map.get("token");
 		// handle here
 		} else {
