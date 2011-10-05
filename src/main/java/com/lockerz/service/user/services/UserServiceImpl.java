@@ -181,6 +181,10 @@ public class UserServiceImpl extends ServiceImpl {
 							} catch (ClientException ce) {
 								// throw a fatal exception and go here
 							    throw ExceptionHelper.fatal(TOKEN_CREATE_FAILED, ce.getMessage(), ce.getHttpStatus());
+							// catch and throw here
+							} catch (Exception e) {
+								// throw a fatal exception and go here
+							    throw ExceptionHelper.fatal(TOKEN_CREATE_FAILED, e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 							}
 						} else {
 							// create the message

@@ -18,12 +18,12 @@
   		<dependency>
     		<groupId>com.lockerz.service</groupId>
     		<artifactId>commons</artifactId>
-    		<version>1.0-20111005.023439-1</version>
+    		<version>1.0-20111005.025924-1</version>
 		</dependency>
 		<dependency>
     		<groupId>com.lockerz.service.authentication</groupId>
     		<artifactId>authentication</artifactId>
-    		<version>1.0-20111005.024210-1</version>
+    		<version>1.0-20111005.030125-1</version>
     		<classifier>bin</classifier>
 		</dependency>
   		<dependency>
