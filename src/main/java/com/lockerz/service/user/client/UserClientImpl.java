@@ -14,8 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.ClassPathResource;
 import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.commons.utilities.ResultMessage;
-import com.lockerz.service.commons.utilities.Utilities;
-
 import org.springframework.http.converter.HttpMessageConverter;
 import com.lockerz.service.user.utilities.PlaceholderConfigurer;
 import com.lockerz.service.commons.client.ClientResponseErrorHandler;
@@ -24,7 +22,7 @@ import com.lockerz.service.commons.client.ClientMappingJacksonHttpMessageConvert
 public class UserClientImpl implements Client {
 	
 	// need this
-	public static final double BAD_ENDPOINT = 100.02;
+	public static final double BAD_ENDPOINT = 2000.01;
 	
 	// need these
 	private RestTemplate restTemplate = null;
@@ -121,15 +119,19 @@ public class UserClientImpl implements Client {
 		} else {
 			// need this
 			String message = "unable to find endpoint " + key;
+			// need this
+			HashMap<Double, String> messages = new HashMap<Double, String>(1);
+			// put the error
+			messages.put(BAD_ENDPOINT, message);
 			// create the exception
-			throw new ClientException(message, null, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new ClientException(message, messages, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ClientException buildResponseException(ResponseEntity<Object> response, String message) {
 		// sanity check
-		if(response != null && Utilities.isNullOrEmpty(message)) {
+		if(response != null) {
 			// need this
 			Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 			// create here

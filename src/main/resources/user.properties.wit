@@ -20,7 +20,7 @@ locator.hibernate.transaction.factory_class=org.hibernate.transaction.JDBCTransa
 
 # datasource settings
 locator.c3po.jdbc.driver=com.mysql.jdbc.Driver
-locator.c3po.jdbc.url=jdbc:mysql://mysql-master0.dba.wit.lockerz.int:3306/pod1
+locator.c3po.jdbc.url=jdbc:mysql://mysql-master0.dba.wit.lockerz.int:3306/locator
 locator.c3po.jdbc.user=awsuser
 locator.c3po.jdbc.password=8RUwdO4Khk3HIF
 locator.c3po.jdbc.acquireIncrement=1
