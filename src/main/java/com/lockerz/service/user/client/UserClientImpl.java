@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.ClassPathResource;
 import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.commons.utilities.ResultMessage;
+import com.lockerz.service.commons.utilities.Utilities;
+
 import org.springframework.http.converter.HttpMessageConverter;
 import com.lockerz.service.user.utilities.PlaceholderConfigurer;
 import com.lockerz.service.commons.client.ClientResponseErrorHandler;
@@ -71,17 +73,7 @@ public class UserClientImpl implements Client {
 	public String login(String token, String username, String password, String remoteIp) 
 	throws ClientException {
 		// need this
-		String endpoint = null;
-		// sanity check
-		if(properties.getProperty("authenticate.endpoint") != null) {
-			// set the end point
-			endpoint = properties.getProperty("authenticate.endpoint");
-		} else {
-			// need this
-			String message = "unable to find endpoint for authenticate service";
-			// create the exception
-			throw new ClientException(message, null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		String endpoint = getEndpoint("authenticate.endpoint");
 		// need this
 		Map<String, String> vars = new HashMap<String, String>();
 		// set the user name
@@ -92,28 +84,66 @@ public class UserClientImpl implements Client {
 		vars.put("password", password);
 		// set the password
 		vars.put("remoteIp", remoteIp);
-		// get the results here
-		ResponseEntity<Object> response = (ResponseEntity<Object>) restTemplate.getForEntity(endpoint, Object.class, vars);
-		// suppress here
-		@SuppressWarnings("unchecked")
 		// need this
-		Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
+		ResponseEntity<Object> response = null;
+		// need this
+		String message = null;
+		// try
+		try {
+			// get the results here
+			response = (ResponseEntity<Object>) restTemplate.getForEntity(endpoint, Object.class, vars);
+		// catch and ignore
+		} catch(Exception e) {
+			// get the message
+			message = e.getMessage();
+		}
 		// validate the response
-		if(response.getStatusCode() == HttpStatus.OK) {
+		if(response != null && response.getStatusCode() == HttpStatus.OK) {
+			// suppress here
+			@SuppressWarnings("unchecked")
+			// need this
+			Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 			// return the token here
 			return (String) map.get("token");
 		// handle here
 		} else {
-			// suppress here
-			@SuppressWarnings("unchecked")
+			// handle the response here
+			throw buildResponseException(response, message);
+		}
+	}
+	
+	public String getEndpoint(String key) throws ClientException{
+		// sanity check
+		if(properties.getProperty(key) != null) {
+			// set the end point
+			return properties.getProperty(key);
+		// throw 
+		} else {
+			// need this
+			String message = "unable to find endpoint " + key;
+			// create the exception
+			throw new ClientException(message, null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ClientException buildResponseException(ResponseEntity<Object> response, String message) {
+		// sanity check
+		if(response != null && Utilities.isNullOrEmpty(message)) {
+			// need this
+			Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 			// create here
 			ResultMessage resultMessage = new ResultMessage((Map<String, Object>) map.get("body"));
 			// need this
-			String message = resultMessage.getMessage();
+			message = resultMessage.getMessage();
 			// need this
 			HashMap<Double, String> messages = resultMessage.getMessages();
 			// throw the exception here
-			throw new ClientException(message, messages, response.getStatusCode());
+			return new ClientException(message, messages, response.getStatusCode());
+		// caught previous
+		} else {
+			// throw the exception here
+			return new ClientException(message);
 		}
 	}
 }
