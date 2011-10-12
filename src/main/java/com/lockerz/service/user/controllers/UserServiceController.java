@@ -8,10 +8,14 @@ import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import com.lockerz.service.commons.auth.Principal;
 import com.lockerz.service.user.utilities.Utilities;
 import com.lockerz.service.user.services.ServiceImpl;
+import com.lockerz.service.commons.auth.PrincipalService;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.lockerz.service.commons.services.ServiceException;
+import com.lockerz.service.commons.utilities.ExceptionHelper;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,5 +71,29 @@ public class UserServiceController {
 			// throw a rest exception here
 			throw new ServiceControllerException(e.getMessage(), e.getMessages(), e.getHttpStatus());
 		}
+    }
+	
+	@RequestMapping(value="/profile", method = RequestMethod.GET)
+    public ResponseEntity<Integer> profile(@Principal PrincipalService user) 
+    throws ServiceControllerException {
+		
+		// try
+		//try {
+		
+			// sanity check
+			if(user == null) {
+				// throw here
+				throw ExceptionHelper.principal();
+			// go here
+			} else {
+				// return here
+				return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+			}
+			
+		// catch here
+		//} catch(ServiceException e) {
+			// throw a rest exception here
+			//throw new ServiceControllerException(e.getMessage(), e.getMessages(), e.getHttpStatus());
+		//}
     }
 }

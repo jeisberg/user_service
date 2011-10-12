@@ -9,9 +9,9 @@ import com.lockerz.service.user.models.UserModel;
 import com.lockerz.service.user.utilities.Utilities;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
-import com.lockerz.service.user.utilities.ExceptionHelper;
 import com.lockerz.service.commons.client.ClientException;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import com.lockerz.service.commons.utilities.ExceptionHelper;
 import com.lockerz.service.commons.services.ServiceException;
 import com.lockerz.service.authentication.client.AuthenticationClientImpl;
 
