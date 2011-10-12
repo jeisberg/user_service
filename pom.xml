@@ -23,7 +23,7 @@
 		<dependency>
     		<groupId>com.lockerz.service</groupId>
     		<artifactId>authentication</artifactId>
-    		<version>1.0-20111012.001744-1</version>
+    		<version>1.0-20111012.190814-1</version>
     		<classifier>bin</classifier>
 		</dependency>
   		<dependency>

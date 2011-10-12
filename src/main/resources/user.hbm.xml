@@ -22,4 +22,57 @@
         	<column name="last_updated"/>
     	</property>
 	</class>
+	<class name="com.lockerz.service.user.models.UserProfileModel" table="user_profile">
+    	<id name="id" column="uid">
+        	<generator class="assigned"/>
+    	</id>
+    	<property name="tshirtSize">
+        	<column name="tshirt_size"/>
+    	</property>
+    	<property name="cellphone">
+        	<column name="cellphone"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="gender">
+        	<column name="gender"/>
+    	</property>
+    	<property name="firstName">
+        	<column name="first_name"/>
+    	</property>
+    	<property name="lastName">
+        	<column name="last_name"/>
+    	</property>
+    	<property name="timezone">
+        	<column name="timezone"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="birthdate">
+        	<column name="birthdate"/>
+    	</property>
+    	<property name="created">
+        	<column name="created"/>
+    	</property>
+    	<property name="modified">
+        	<column name="last_updated"/>
+    	</property>
+	</class>
 </hibernate-mapping>

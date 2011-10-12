@@ -2,6 +2,7 @@ package com.lockerz.service.user;
 
 import junit.framework.TestCase;
 import org.springframework.http.HttpStatus;
+import com.lockerz.service.user.models.UserProfile;
 import org.springframework.context.ApplicationContext;
 import com.lockerz.service.user.services.UserServiceImpl;
 import com.lockerz.service.commons.services.ServiceException;
@@ -102,7 +103,7 @@ public class Service extends TestCase {
         	assertEquals(e.getHttpStatus(), HttpStatus.BAD_REQUEST);
         }
         
-     // test the service
+        // test the service
         try { 
             // get the user lookup
             userToken = userService.login("invalid Key","srijith@lockerz.com", "lockerz", "");
@@ -119,6 +120,25 @@ public class Service extends TestCase {
             // assert here
             assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
         }
+        
+        // test the service
+        try { 
+            // get the user lookup
+            UserProfile userProfile = userService.profile(16223374L);
+            // output here
+            System.out.println(userProfile);
+        // catch here
+        } catch(ServiceException e) {
+            // out here
+            System.out.println(e.getMessage());
+            // out here
+            System.out.println(e.getMessages());
+            // out here
+            System.out.println(e.getHttpStatus());
+            // assert here
+            assertEquals(e.getHttpStatus(), HttpStatus.UNAUTHORIZED);
+        }
+        
         // exit here
     	System.exit(0);
     }

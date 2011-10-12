@@ -1,6 +1,7 @@
 package com.lockerz.service.user.dao;
 
 import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.user.models.UserProfile;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
 
@@ -15,4 +16,6 @@ public interface Dao {
 	public UserModel getUser(long id) throws DaoException;
 	
 	public void updateUser(UserModel user) throws DaoException;
+	
+	public UserProfile profile(long userId) throws DaoException;
 }

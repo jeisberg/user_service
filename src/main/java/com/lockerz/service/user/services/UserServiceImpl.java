@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import com.lockerz.service.user.dao.DaoImpl;
 import com.lockerz.service.user.dao.DaoFactory;
 import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.user.models.UserProfile;
 import com.lockerz.service.user.utilities.Utilities;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
@@ -207,5 +208,31 @@ public class UserServiceImpl extends ServiceImpl {
 				throw ExceptionHelper.fatal(ExceptionHelper.EXCEPTION, message, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
+	}
+	
+	public UserProfile profile(long userId) throws ServiceException {
+		// get the session here
+		Session session = pods[Nodes.LOCATOR.ordinal()].getSessionFactory().getCurrentSession();
+		// create the factory here
+		DaoFactory factory = DaoFactory.instance(DaoFactory.USER);
+		// create the instance here
+		DaoImpl dao = factory.getUserDao(session);
+		// need this
+		UserProfile userProfile = null;
+		// try
+		try {
+			// call here
+			userProfile = dao.profile(userId);
+		// catch here
+		} catch(DaoException e) {
+			// throw a new exception here
+			throw new ServiceException(e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+		// clean up here
+		} finally {
+			// close here
+			dao.close();
+		}
+		// return here
+		return userProfile;
 	}
 }

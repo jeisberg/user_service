@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import com.lockerz.service.user.models.UserProfile;
 import org.springframework.core.io.ClassPathResource;
 import com.lockerz.service.commons.client.ClientException;
 import com.lockerz.service.commons.utilities.ResultMessage;
@@ -103,6 +104,43 @@ public class UserClientImpl implements Client {
 			Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
 			// return the token here
 			return (String) map.get("token");
+		// handle here
+		} else {
+			// handle the response here
+			throw buildResponseException(response, message);
+		}
+	}
+	
+	public UserProfile profile(String apiKey, String token) throws ClientException {
+		// need this
+		String endpoint = getEndpoint("profile.endpoint");
+		// need this
+		Map<String, String> vars = new HashMap<String, String>();
+		// set the user name
+		vars.put("apiKey", apiKey);
+		// set the user name
+		vars.put("token", "" + token);
+		// need this
+		ResponseEntity<Object> response = null;
+		// need this
+		String message = null;
+		// try
+		try {
+			// get the results here
+			response = (ResponseEntity<Object>) restTemplate.getForEntity(endpoint, Object.class, vars);
+		// catch and ignore
+		} catch(Exception e) {
+			// get the message
+			message = e.getMessage();
+		}
+		// validate the response
+		if(response != null && response.getStatusCode() == HttpStatus.OK) {
+			// suppress here
+			@SuppressWarnings("unchecked")
+			// need this
+			Map<String, Object> map = (LinkedHashMap<String, Object>) response.getBody();
+			// return the token here
+			return new UserProfile(map);
 		// handle here
 		} else {
 			// handle the response here

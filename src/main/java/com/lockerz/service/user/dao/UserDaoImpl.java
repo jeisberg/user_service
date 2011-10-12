@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import com.lockerz.service.user.models.UserModel;
+import com.lockerz.service.user.models.UserProfile;
 import com.lockerz.service.commons.dao.DaoException;
 import com.lockerz.service.user.models.UserLookupModel;
 
@@ -109,6 +110,18 @@ public class UserDaoImpl extends DaoImpl {
 			// throw a client exception
 			throw new DaoException(message);
 		}
+	}
+	
+	@Override
+	public UserProfile profile(long userId) throws DaoException {
+		// return here
+		UserProfile userProfile = new UserProfile();
+		// set the id
+		userProfile.setId(userId);
+		// set the token
+		userProfile.setToken("token");
+		// return here
+		return userProfile;
 	}
 	
 	@Override

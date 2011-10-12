@@ -208,3 +208,4 @@ authorizer.apiKey=A1234567890B
 
 # authenticate endpoint
 authenticate.endpoint=http://localhost:8080/user-1.0-SNAPSHOT/user/login/?apiKey={apiKey}&username={username}&password={password}&remoteIp={remoteIp}
+profile.endpoint=http://localhost:8080/user-1.0-SNAPSHOT/user/profile/?apiKey={apiKey}&token={token}
